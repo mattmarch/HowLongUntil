@@ -2,6 +2,7 @@ package com.example.howlonguntil
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.howlonguntil.entities.Event
@@ -13,5 +14,8 @@ interface EventDao {
 
     @Insert
     suspend fun insert(event: Event)
+
+    @Delete
+    suspend fun delete(event: Event)
 
 }

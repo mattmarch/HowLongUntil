@@ -24,4 +24,8 @@ class EventsViewModel(application: Application): AndroidViewModel(application) {
         repository.insert(event)
     }
 
+    fun delete(event: Event) = viewModelScope.launch(Dispatchers.IO) {
+        repository.delete(event)
+    }
+
 }

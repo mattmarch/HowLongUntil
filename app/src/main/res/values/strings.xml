@@ -8,4 +8,5 @@
     <string name="event_time_hint">Event Time</string>
     <string name="event_date_hint">Event date</string>
     <string name="something_went_wrong">Sorry! Something went wrong!</string>
+    <string name="delete_event">delete event</string>
 </resources>

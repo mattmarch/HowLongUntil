@@ -4,13 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.howlonguntil.entities.Event
 import java.time.Duration
 import java.time.LocalDateTime
 
-class EventListAdapter internal  constructor(context: Context):RecyclerView.Adapter<EventListAdapter.EventViewHolder>() {
+class EventListAdapter(context: Context, val deleteEvent: (event: Event) -> Unit) :
+    RecyclerView.Adapter<EventListAdapter.EventViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var events = emptyList<Event>()
@@ -18,6 +20,7 @@ class EventListAdapter internal  constructor(context: Context):RecyclerView.Adap
     inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val eventItemTitle = itemView.findViewById<TextView>(R.id.eventTitle)
         val eventItemTimeUntil = itemView.findViewById<TextView>(R.id.timeUntil)
+        val eventItemDeleteButton = itemView.findViewById<ImageButton>(R.id.deleteButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
@@ -29,6 +32,9 @@ class EventListAdapter internal  constructor(context: Context):RecyclerView.Adap
         val current = events[position]
         holder.eventItemTitle.text = current.eventName
         holder.eventItemTimeUntil.text = datesToTimeUntilString(current.eventDate, LocalDateTime.now())
+        holder.eventItemDeleteButton.setOnClickListener {
+            deleteEvent(current)
+        }
     }
 
     internal fun setEvents(events: List<Event>) {

@@ -24,12 +24,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        eventViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(EventsViewModel::class.java)
+
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val adapter = EventListAdapter(this)
+        val adapter = EventListAdapter(this) { event -> eventViewModel.delete(event)}
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        eventViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(EventsViewModel::class.java)
 
         eventViewModel.events.observe(this, Observer { events ->
             events?.let { adapter.setEvents(it) }

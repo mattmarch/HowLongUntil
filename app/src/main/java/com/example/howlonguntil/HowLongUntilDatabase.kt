@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
-@Database(entities = arrayOf(Event::class), version = 1, exportSchema = false)
+@Database(entities = [Event::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 public abstract class HowLongUntilDatabase: RoomDatabase() {
     abstract fun eventDao(): EventDao

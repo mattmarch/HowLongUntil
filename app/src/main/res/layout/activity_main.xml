@@ -12,4 +12,17 @@
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="201dp"
         tools:layout_editor_absoluteY="183dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_baseline_add_24"
+        android:onClick="onAddEventClick"
+        android:contentDescription="@string/add_new_event" />
 </androidx.constraintlayout.widget.ConstraintLayout>

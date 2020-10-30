@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">HowLongUntil</string>
+    <string name="add_new_event">add new event</string>
+    <string name="event_not_saved_toast">Event not saved</string>
+    <string name="event_title_hint">🗓 Event Title</string>
+    <string name="create_event_button_text">Create Event</string>
+    <string name="create_a_new_event_title">Create a new event</string>
+    <string name="event_time_hint">Event Time</string>
+    <string name="event_date_hint">Event date</string>
 </resources>

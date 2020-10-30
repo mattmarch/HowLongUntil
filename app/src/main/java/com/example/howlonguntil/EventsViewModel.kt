@@ -2,14 +2,26 @@ package com.example.howlonguntil
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
 import com.example.howlonguntil.entities.Event
-import java.time.LocalDate
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class EventsViewModel(application: Application): AndroidViewModel(application) {
 
-    val events: List<Event> = listOf(
-        Event("🎄 Christmas", LocalDate.of(2020, 12, 25)),
-        Event("🎃 Halloween", LocalDate.of(2020, 10, 31))
-    )
+    private val repository: EventRepository
+
+    val events: LiveData<List<Event>>
+
+    init {
+        val eventDao = HowLongUntilDatabase.getDatabase(application, viewModelScope).eventDao()
+        repository = EventRepository(eventDao)
+        events = repository.allEvents
+    }
+
+    fun insert(event: Event) = viewModelScope.launch(Dispatchers.IO) {
+        repository.insert(event)
+    }
 
 }

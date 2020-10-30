@@ -1,5 +1,13 @@
 package com.example.howlonguntil.entities
 
-import java.time.LocalDate
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import java.time.LocalDateTime
 
-data class Event(val name: String, val date: LocalDate)
+@Entity
+data class Event(
+    val eventName: String,
+    val eventDate: LocalDateTime,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0
+
+)

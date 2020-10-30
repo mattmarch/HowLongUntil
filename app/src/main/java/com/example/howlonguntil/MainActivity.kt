@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.howlonguntil.entities.Event
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,7 +47,17 @@ class MainActivity : AppCompatActivity() {
             return
         }
         if (resultCode == Activity.RESULT_OK) {
-            eventViewModel.insert(Event("Test new event", LocalDateTime.now()))
+            val title = data?.extras?.getString(NewEventActivity.EXTRA_TITLE)
+            val dateEpochSecond = data?.extras?.getLong(NewEventActivity.EXTRA_DATETIME)
+
+            if (title == null || dateEpochSecond == null)
+                Toast.makeText(
+                    applicationContext,
+                    getString(R.string.something_went_wrong),
+                    Toast.LENGTH_LONG
+                ).show()
+            else
+                eventViewModel.insert(Event(title, LocalDateTime.ofEpochSecond(dateEpochSecond, 0, ZoneOffset.UTC)))
         } else {
             Toast.makeText(
                 applicationContext,

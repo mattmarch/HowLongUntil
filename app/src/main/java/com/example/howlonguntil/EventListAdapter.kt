@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.howlonguntil.entities.Event
+import java.time.LocalDate
 
 class EventListAdapter internal  constructor(context: Context):RecyclerView.Adapter<EventListAdapter.EventViewHolder>() {
 
@@ -26,7 +27,7 @@ class EventListAdapter internal  constructor(context: Context):RecyclerView.Adap
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         val current = events[position]
         holder.eventItemTitle.text = current.name
-        holder.eventItemTimeUntil.text = current.date.toString()
+        holder.eventItemTimeUntil.text = datesToTimeUntilString(current.date, LocalDate.now())
     }
 
     internal fun setEvents(events: List<Event>) {
@@ -35,4 +36,11 @@ class EventListAdapter internal  constructor(context: Context):RecyclerView.Adap
     }
 
     override fun getItemCount() = events.size
+
+    private fun datesToTimeUntilString(futureDate: LocalDate, currentDate: LocalDate): String {
+        if (currentDate.isAfter(futureDate)) {
+            return "This has already happened"
+        }
+        return futureDate.toString()
+    }
 }

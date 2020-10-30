@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.howlonguntil.entities.Event
+import java.time.Duration
 import java.time.LocalDateTime
 
 class EventListAdapter internal  constructor(context: Context):RecyclerView.Adapter<EventListAdapter.EventViewHolder>() {
@@ -41,6 +42,12 @@ class EventListAdapter internal  constructor(context: Context):RecyclerView.Adap
         if (currentDate.isAfter(futureDate)) {
             return "This has already happened"
         }
-        return futureDate.toString()
+
+        val dateDifference = Duration.between(currentDate, futureDate)
+        val daysAway = dateDifference.toDays()
+        val hoursAway = dateDifference.toHours() % 24
+        val minutesAway = dateDifference.toMinutes() % 60
+
+        return "$daysAway days, $hoursAway hours and $minutesAway minutes"
     }
 }

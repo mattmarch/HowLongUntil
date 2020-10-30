@@ -44,8 +44,8 @@ public abstract class HowLongUntilDatabase: RoomDatabase() {
         }
 
         suspend fun populateInitialValues(eventDao: EventDao) {
-            eventDao.insert(Event("🎃 Halloween", LocalDateTime.of(2020, 10, 31, 0, 0)))
-            eventDao.insert(Event("🎄 Christmas", LocalDateTime.of(2020, 12, 25, 0, 0)))
+            eventDao.insert(Event("🎃 Halloween 2020", LocalDateTime.of(2020, 10, 31, 0, 0)))
+            eventDao.insert(Event("🎄 Christmas 2020", LocalDateTime.of(2020, 12, 25, 0, 0)))
         }
 
     }

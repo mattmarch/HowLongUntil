@@ -46,7 +46,7 @@ class NewEventActivity : AppCompatActivity() {
 
         val intent = Intent()
         intent.putExtra(EXTRA_TITLE, titleInput.text.toString())
-        val date = LocalDateTime.of(datePicker.year, datePicker.month, datePicker.dayOfMonth, timePicker.hour, timePicker.minute)
+        val date = LocalDateTime.of(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth, timePicker.hour, timePicker.minute)
         intent.putExtra(EXTRA_DATETIME, date.toEpochSecond(ZoneOffset.UTC))
 
         setResult(Activity.RESULT_OK, intent)

@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         eventViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(EventsViewModel::class.java)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val adapter = EventListAdapter(this) { event -> eventViewModel.delete(event)}
+        val adapter = EventListAdapter(this) { event -> eventViewModel.delete(event) }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -57,8 +57,10 @@ class MainActivity : AppCompatActivity() {
                     getString(R.string.something_went_wrong),
                     Toast.LENGTH_LONG
                 ).show()
-            else
-                eventViewModel.insert(Event(title, LocalDateTime.ofEpochSecond(dateEpochSecond, 0, ZoneOffset.UTC)))
+            else {
+                val date = LocalDateTime.ofEpochSecond(dateEpochSecond, 0, ZoneOffset.UTC)
+                eventViewModel.insert(Event(title, date))
+            }
         } else {
             Toast.makeText(
                 applicationContext,
